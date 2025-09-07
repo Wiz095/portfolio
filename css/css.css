@@ -17,6 +17,7 @@ a {
     text-decoration: none;
 }
 
+.hidden { display: none; }
 ion-icon {
     font-size: 40px;
     color: rgb(78, 78, 78);

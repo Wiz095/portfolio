@@ -71,6 +71,31 @@ function detectScroll() {
       }
 }
 
+// Load header/Footer
+async function loadPartial(id, file) {
+  const container = document.getElementById(id);
+  let content = localStorage.getItem(file);
+  if (content) {
+    container.innerHTML = content;
+    container.classList.remove("hidden");
+  } else {
+    try {
+      content = await fetch(file).then(r => r.text());
+      container.innerHTML = content;
+      container.classList.remove("hidden");
+      localStorage.setItem(file, content);
+    } catch (err) {
+      console.error(`Error loading ${file}:`, err);
+    }
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  loadPartial("header", "/partials/header.html");
+  loadPartial("footer", "/partials/footer.html");
+});
+
+
 // if (screenWidth.matches) {
 //     logo.innerText = "WG."
 // } else {
